@@ -1,9 +1,18 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest{
+
+    @AfterMethod
+    public void methodPostCondition() {
+        driver.findElement(
+                By.xpath("//div[contains(@class,'navbar-logged')]//button"))
+                .click();
+        driver.navigate().to("https://telranedu.web.app/home");
+    }
 
     @Test
     public void positiveLoginTest() {

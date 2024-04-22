@@ -11,10 +11,10 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    WebDriver driver;
+    static WebDriver driver;
 
     @BeforeSuite
-    public void init() {
+    public static void init() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--lang=en");
         WebDriverManager.chromedriver().setup();
@@ -27,7 +27,7 @@ public class BaseTest {
     }
 
     @AfterSuite
-    public void tearDown() {
+    public static void tearDown() {
         driver.quit();
     }
 }
