@@ -40,7 +40,7 @@ public class LoginTest extends BaseTest{
         WebElement signOutBtn = driver.findElement(
                 By.xpath("//div[contains(@class,'navbar-logged')]//button")
         );
-        String actualRes = signOutBtn.getText().trim();
+        String actualRes = getTextBase(signOutBtn);
         System.out.println(actualRes);
 
 //        Assert.assertEquals(

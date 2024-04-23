@@ -75,7 +75,7 @@ public class AddContactTests extends BaseTest{
 
         boolean res = false;
         for(WebElement el:allPhones) {
-            if(el.getText().trim().equals(numberPhone)) {
+            if(getTextBase(el).equals(numberPhone)) {
                 res = true;
                 break;
             }
