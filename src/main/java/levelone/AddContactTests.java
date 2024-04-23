@@ -1,4 +1,5 @@
-import com.sun.source.tree.AssertTree;
+package levelone;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -7,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class AddContactTests extends BaseTest{
+public class AddContactTests extends BaseTest {
 
     @BeforeClass
     public void preconditions() {
