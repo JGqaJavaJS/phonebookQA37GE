@@ -1,12 +1,11 @@
+import dto.UserDTO;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
@@ -80,5 +79,13 @@ public class BaseTest {
 
     public void clickLoginOnNavBar() {
         driver.findElement(By.xpath("//a[@href='/login']")).click();
+    }
+
+    public void login(UserDTO user) {
+        fillEmailOnLogin(user.getEmail());
+        // fill password by: //input[@name='password'] "123456Aa$"
+        fillPasswordOnLogin(user.getPassword());
+        // click login btn by: //button[@name='login']
+        clickLoginBtn();
     }
 }

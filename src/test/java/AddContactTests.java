@@ -1,9 +1,8 @@
-import com.sun.source.tree.AssertTree;
+import dto.UserDTO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -17,11 +16,9 @@ public class AddContactTests extends BaseTest{
         // click on login btn by: //a[@href='/login']
         clickLoginOnNavBar();
         // fill email by: //input[@name='email']
-        fillEmailOnLogin("testqa20@gmail.com");
-        // fill password by: //input[@name='password']
-        fillPasswordOnLogin("123456Aa$");
-        // click login btn by: //button[@name='login']
-        clickLoginBtn();
+        UserDTO user = new UserDTO().setEmail("testqa20@gmail.com")
+                .setPassword("123456Aa$");
+        login(user);
 
     }
 
