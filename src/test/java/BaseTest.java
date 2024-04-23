@@ -40,4 +40,45 @@ public class BaseTest {
     public WebElement getElementHomePageText() {
         return driver.findElement(By.cssSelector("div:nth-child(2) h1"));
     }
+
+    public void navigateToHomePage() {
+        driver.navigate().to("https://telranedu.web.app/home");
+    }
+
+    public void clickLogoutBtn() {
+        driver.findElement(
+                By.xpath("//div[contains(@class,'navbar-logged')]//button"))
+                .click();
+    }
+
+    public WebElement getSignOutBtnElement() {
+        WebElement signOutBtn = driver.findElement(
+                By.xpath("//div[contains(@class,'navbar-logged')]//button")
+        );
+        return signOutBtn;
+    }
+
+    public void clickLoginBtn() {
+        driver.findElement(By.xpath("//button[@name='login']")).click();
+    }
+
+    public void fillPasswordOnLogin(String password) {
+        WebElement inputPassword = driver.findElement(By
+                .xpath("//input[@name='password']"));
+        inputPassword.click();
+        inputPassword.clear();
+        inputPassword.sendKeys(password);
+    }
+
+    public void fillEmailOnLogin(String email) {
+        WebElement inputEmail = driver.findElement(By
+                .xpath("//input[@name='email']"));
+        inputEmail.click();
+        inputEmail.clear();
+        inputEmail.sendKeys(email);
+    }
+
+    public void clickLoginOnNavBar() {
+        driver.findElement(By.xpath("//a[@href='/login']")).click();
+    }
 }

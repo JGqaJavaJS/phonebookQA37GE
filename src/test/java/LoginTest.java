@@ -1,4 +1,3 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -8,38 +7,26 @@ public class LoginTest extends BaseTest{
 
     @AfterMethod
     public void methodPostCondition() {
-        driver.findElement(
-                By.xpath("//div[contains(@class,'navbar-logged')]//button"))
-                .click();
-        driver.navigate().to("https://telranedu.web.app/home");
+        clickLogoutBtn();
+        navigateToHomePage();
     }
 
     @Test
     public void positiveLoginTest() {
         // click on login btn by: //a[@href='/login']
-        driver.findElement(By.xpath("//a[@href='/login']")).click();
+        clickLoginOnNavBar();
         // fill email by: //input[@name='email']
-        WebElement inputEmail = driver.findElement(By
-                .xpath("//input[@name='email']"));
-        inputEmail.click();
-        inputEmail.clear();
-        inputEmail.sendKeys("testqa20@gmail.com");
-        // fill password by: //input[@name='password']
-        WebElement inputPassword = driver.findElement(By
-                .xpath("//input[@name='password']"));
-        inputPassword.click();
-        inputPassword.clear();
-        inputPassword.sendKeys("123456Aa$");
+        fillEmailOnLogin("testqa20@gmail.com");
+        // fill password by: //input[@name='password'] "123456Aa$"
+        fillPasswordOnLogin("123456Aa$");
         // click login btn by: //button[@name='login']
-        driver.findElement(By.xpath("//button[@name='login']")).click();
+        clickLoginBtn();
 
 
-      //  validation - verification by sign out //div[contains(@class,'navbar-logged')]//button
+        //  validation - verification by sign out //div[contains(@class,'navbar-logged')]//button
         // text: Sign Out
 
-        WebElement signOutBtn = driver.findElement(
-                By.xpath("//div[contains(@class,'navbar-logged')]//button")
-        );
+        WebElement signOutBtn = getSignOutBtnElement();
         String actualRes = getTextBase(signOutBtn);
         System.out.println(actualRes);
 
@@ -51,4 +38,5 @@ public class LoginTest extends BaseTest{
 
         Assert.assertEquals(actualRes, "Sign Out");
     }
+
 }
