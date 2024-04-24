@@ -1,5 +1,8 @@
 package config;
 
+import helpers.ContactHelper;
+import helpers.HomePageHelper;
+import helpers.UserHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,12 +14,27 @@ public class ApplicationManager {
 
     static WebDriver driver;
     String browser;
+    ContactHelper contactHelper;
+    HomePageHelper homePageHelper;
+    UserHelper userHelper;
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
+    }
+
+    public HomePageHelper getHomePageHelper() {
+        return homePageHelper;
+    }
+
+    public UserHelper getUserHelper() {
+        return userHelper;
+    }
 
     public ApplicationManager(String browser) {
         this.browser = browser;
     }
 
-    public static void init() {
+    public void init() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--lang=en");
         WebDriverManager.chromedriver().setup();
@@ -27,9 +45,14 @@ public class ApplicationManager {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.navigate().to("https://telranedu.web.app/home");
+
+        // init helpers
+        contactHelper = new ContactHelper(driver);
+        homePageHelper = new HomePageHelper(driver);
+        userHelper = new UserHelper(driver);
     }
 
-    public static void quit() {
+    public void quit() {
         driver.quit();
     }
 

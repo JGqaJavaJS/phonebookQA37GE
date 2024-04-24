@@ -1,3 +1,5 @@
+package tests;
+
 import dto.ContactDTO;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -8,19 +10,19 @@ public class AddContactTests extends BaseTest{
 
     @BeforeClass
     public void preconditions() {
-        clickLoginOnNavBar();
-        login(user);
+        app.getUserHelper().clickLoginOnNavBar();
+        app.getUserHelper().login(user);
     }
 
     @AfterClass
     public void methodPostCondition() {
-        clickLogoutBtn();
-        navigateToHomePage();
+        app.getUserHelper().clickLogoutBtn();
+        app.getHomePageHelper().navigateToHomePage();
     }
 
     @Test
     public void positiveAddContact() {
-        clickAddOnNavBar();
+        app.getContactHelper().clickAddOnNavBar();
         ContactDTO contactDTO = new ContactDTO()
                 .setName("kjdhgjkr")
                 .setLastName("jhsbfh")
@@ -28,11 +30,11 @@ public class AddContactTests extends BaseTest{
                 .setEmail("sjkfhj@mail.com")
                 .setAddress("hjsbfhb")
                 .setDescription("bhjfdb");
-        addContact(contactDTO);
+        app.getContactHelper().addContact(contactDTO);
 
-        pause(3000);
+        app.getContactHelper().pause(3000);
 
-        Assert.assertTrue(isContactDisplaysOnThePage("5554567890"));
+        Assert.assertTrue(app.getContactHelper().isContactDisplaysOnThePage("5554567890"));
     }
 
 }

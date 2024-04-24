@@ -1,4 +1,5 @@
-import dto.UserDTO;
+package tests;
+
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -8,16 +9,15 @@ public class LoginTest extends BaseTest{
 
     @AfterMethod
     public void methodPostCondition() {
-        clickLogoutBtn();
-        navigateToHomePage();
+        app.getUserHelper().clickLogoutBtn();
+        app.getHomePageHelper().navigateToHomePage();
     }
 
     @Test
     public void positiveLoginTest() {
-        clickLoginOnNavBar();
-        login(user);
-        WebElement signOutBtn = getSignOutBtnElement();
-        String actualRes = getTextBase(signOutBtn);
+        app.getUserHelper().clickLoginOnNavBar();
+        app.getUserHelper().login(user);
+        String actualRes = app.getUserHelper().getSignOutBtnText();
         System.out.println(actualRes);
 
 //        Assert.assertEquals(
