@@ -13,7 +13,7 @@ public class BaseHelper {
         this.driver = driver;
     }
 
-    // find elemnt / s
+    // find elemnt / elements
 
     protected WebElement findElementBase(By by) {
         System.out.println("Locator: findElement: " + by.toString());

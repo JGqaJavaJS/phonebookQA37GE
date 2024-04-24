@@ -22,15 +22,13 @@ public class UserHelper extends BaseHelper{
                 .click();
     }
 
-    public void clickLoginBtn() {
-        driver.findElement(By.xpath("//button[@name='login']")).click();
+    public void clickLoginOnNavBar() {
+        driver.findElement(By.xpath("//a[@href='/login']")).click();
     }
 
     public void login(UserDTO user) {
         fillEmailOnLogin(user.getEmail());
-        // fill password by: //input[@name='password'] "123456Aa$"
         fillPasswordOnLogin(user.getPassword());
-        // click login btn by: //button[@name='login']
         clickLoginBtn();
     }
 
@@ -50,9 +48,8 @@ public class UserHelper extends BaseHelper{
         inputEmail.sendKeys(email);
     }
 
-    public void clickLoginOnNavBar() {
-        driver.findElement(By.xpath("//a[@href='/login']")).click();
+    public void clickLoginBtn() {
+        driver.findElement(By.xpath("//button[@name='login']")).click();
     }
-
 
 }
