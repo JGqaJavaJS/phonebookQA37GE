@@ -1,3 +1,4 @@
+import config.ApplicationManager;
 import dto.ContactDTO;
 import dto.UserDTO;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -6,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.Browser;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -13,26 +15,17 @@ import java.time.Duration;
 import java.util.List;
 
 public class BaseTest {
-
-    static WebDriver driver;
+    static ApplicationManager app =
+            new ApplicationManager(System
+                    .getProperty("browser", Browser.CHROME.browserName()));
     UserDTO user = new UserDTO().setEmail("testqa20@gmail.com").setPassword("123456Aa$");
-
     @BeforeSuite
-    public static void init() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--lang=en");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize();
-        // implicit waiting's
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        driver.navigate().to("https://telranedu.web.app/home");
+    public static void startBrowser() {
+        ApplicationManager.init();
     }
-
     @AfterSuite
     public static void tearDown() {
-        driver.quit();
+        ApplicationManager.quit();
     }
 
     public String getTextBase(WebElement element) {
@@ -40,32 +33,32 @@ public class BaseTest {
     }
 
     public WebElement getElementHomePageText() {
-        return driver.findElement(By.cssSelector("div:nth-child(2) h1"));
+        return ApplicationManager.getDriver().findElement(By.cssSelector("div:nth-child(2) h1"));
     }
 
     public void navigateToHomePage() {
-        driver.navigate().to("https://telranedu.web.app/home");
+        ApplicationManager.getDriver().navigate().to("https://telranedu.web.app/home");
     }
 
     public void clickLogoutBtn() {
-        driver.findElement(
+        ApplicationManager.getDriver().findElement(
                 By.xpath("//div[contains(@class,'navbar-logged')]//button"))
                 .click();
     }
 
     public WebElement getSignOutBtnElement() {
-        WebElement signOutBtn = driver.findElement(
+        WebElement signOutBtn = ApplicationManager.getDriver().findElement(
                 By.xpath("//div[contains(@class,'navbar-logged')]//button")
         );
         return signOutBtn;
     }
 
     public void clickLoginBtn() {
-        driver.findElement(By.xpath("//button[@name='login']")).click();
+        ApplicationManager.getDriver().findElement(By.xpath("//button[@name='login']")).click();
     }
 
     public void fillPasswordOnLogin(String password) {
-        WebElement inputPassword = driver.findElement(By
+        WebElement inputPassword = ApplicationManager.getDriver().findElement(By
                 .xpath("//input[@name='password']"));
         inputPassword.click();
         inputPassword.clear();
@@ -73,7 +66,7 @@ public class BaseTest {
     }
 
     public void fillEmailOnLogin(String email) {
-        WebElement inputEmail = driver.findElement(By
+        WebElement inputEmail = ApplicationManager.getDriver().findElement(By
                 .xpath("//input[@name='email']"));
         inputEmail.click();
         inputEmail.clear();
@@ -81,7 +74,7 @@ public class BaseTest {
     }
 
     public void clickLoginOnNavBar() {
-        driver.findElement(By.xpath("//a[@href='/login']")).click();
+        ApplicationManager.getDriver().findElement(By.xpath("//a[@href='/login']")).click();
     }
 
     public void login(UserDTO user) {
@@ -111,7 +104,7 @@ public class BaseTest {
     }
 
     public boolean isContactDisplaysOnThePage(String phone) {
-        List<WebElement> allPhones = driver.findElements(By.xpath("//div[contains(@class,'contact-item_card')]//h3"));
+        List<WebElement> allPhones = ApplicationManager.getDriver().findElements(By.xpath("//div[contains(@class,'contact-item_card')]//h3"));
         boolean res = false;
         for(WebElement el:allPhones) {
             if(getTextBase(el).equals(phone)) {
@@ -123,7 +116,7 @@ public class BaseTest {
     }
 
     public void clickAddContact() {
-        driver.findElement(By.xpath("//div[contains(@class,'add_form')]//button")).click();
+        ApplicationManager.getDriver().findElement(By.xpath("//div[contains(@class,'add_form')]//button")).click();
     }
 
     public void fillDescriptionAddContact(String description) {
@@ -131,7 +124,7 @@ public class BaseTest {
     }
 
     public void typeText(String text, By by) {
-        WebElement element = driver.findElement(by);
+        WebElement element = ApplicationManager.getDriver().findElement(by);
         element.click();
         element.clear();
         element.sendKeys(text);
@@ -158,6 +151,6 @@ public class BaseTest {
     }
 
     public void clickAddOnNavBar() {
-        driver.findElement(By.xpath("//a[@href='/add']")).click();
+        ApplicationManager.getDriver().findElement(By.xpath("//a[@href='/add']")).click();
     }
 }
