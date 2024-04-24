@@ -13,6 +13,7 @@ import java.time.Duration;
 public class BaseTest {
 
     static WebDriver driver;
+    UserDTO user = new UserDTO().setEmail("testqa20@gmail.com").setPassword("123456Aa$");
 
     @BeforeSuite
     public static void init() {

@@ -14,18 +14,8 @@ public class LoginTest extends BaseTest{
 
     @Test
     public void positiveLoginTest() {
-        // click on login btn by: //a[@href='/login']
         clickLoginOnNavBar();
-        // fill email by: //input[@name='email']
-        UserDTO user = new UserDTO();
-        user.setEmail("testqa20@gmail.com")
-                .setPassword("123456Aa$");
         login(user);
-
-
-        //  validation - verification by sign out //div[contains(@class,'navbar-logged')]//button
-        // text: Sign Out
-
         WebElement signOutBtn = getSignOutBtnElement();
         String actualRes = getTextBase(signOutBtn);
         System.out.println(actualRes);
