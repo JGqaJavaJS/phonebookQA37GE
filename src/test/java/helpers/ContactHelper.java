@@ -12,6 +12,9 @@ public class ContactHelper extends BaseHelper{
         super(driver);
     }
 
+    By getAllContactsNames = By.xpath("//div[contains(@class,'contact-item_card')]/h2");
+    By btnRemoveContact = By.xpath("//button[text()='Remove']");
+
     public void clickAddOnNavBar() {
         driver.findElement(By.xpath("//a[@href='/add']")).click();
     }
@@ -67,4 +70,60 @@ public class ContactHelper extends BaseHelper{
         return res;
     }
 
+    public void deleteContactByName(String name) {
+        // find all names of our contacts:
+        // div[contains(@class,'contact-item_card')]/h2
+        List<WebElement> allContactsNames = findElementsBase(getAllContactsNames);
+        // find our contact
+        if(!allContactsNames.isEmpty()) {
+            for (WebElement el : allContactsNames) {
+                if(getTextBaseByElement(el).equals(name)) {
+                    // click on our contact
+                    // click //button[text()='Remove']
+                    clickBaseByElement(el);
+                    clickBase(btnRemoveContact);
+                }
+            }
+        } else {
+            System.out.println("list is empty");
+        }
+    }
+
+    public boolean isContactByNameExist(String name) {
+        // return true, if contact by name exist
+        boolean flag = false;
+        List<WebElement> allContactNames = findElementsBase(getAllContactsNames);
+        if(!allContactNames.isEmpty()) {
+            for (WebElement el : allContactNames) {
+                if(getTextBaseByElement(el).equals(name)) {
+                    flag = true;
+                    return flag;
+                }
+            }
+        } else {
+            System.out.println("list is empty");
+            return false;
+        }
+        return flag;
+    }
+
+    public void deleteAllContacts() {
+        List<WebElement> allContactsNames = findElementsBase(getAllContactsNames);
+        // find our contact
+        if(!allContactsNames.isEmpty()) {
+            for (WebElement el : allContactsNames) {
+                    // click on our contact
+                    // click //button[text()='Remove']
+                    clickBaseByElement(el);
+                    clickBase(btnRemoveContact);
+            }
+        } else {
+            System.out.println("list is empty");
+        }
+    }
+
+    public boolean isContactListEmpty() {
+        List<WebElement> allContactsNames = findElementsBase(getAllContactsNames);
+        return allContactsNames.isEmpty();
+    }
 }

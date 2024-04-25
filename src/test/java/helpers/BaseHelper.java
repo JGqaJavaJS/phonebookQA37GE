@@ -24,6 +24,14 @@ public class BaseHelper {
         return driver.findElements(by);
     }
 
+    protected void clickBase(By by) {
+        findElementBase(by).click();
+    }
+
+    protected void clickBaseByElement(WebElement element) {
+        element.click();
+    }
+
     //-------------------------------------------
 
     // text
