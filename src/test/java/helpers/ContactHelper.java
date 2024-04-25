@@ -108,18 +108,35 @@ public class ContactHelper extends BaseHelper{
     }
 
     public void deleteAllContacts() {
-        List<WebElement> allContactsNames = findElementsBase(getAllContactsNames);
-        // find our contact
-        if(!allContactsNames.isEmpty()) {
-            for (WebElement el : allContactsNames) {
-                    // click on our contact
-                    // click //button[text()='Remove']
-                    clickBaseByElement(el);
-                    clickBase(btnRemoveContact);
-            }
-        } else {
-            System.out.println("list is empty");
+
+        while(!findElementsBase(getAllContactsNames).isEmpty())
+        {
+            WebElement element = findElementBase(getAllContactsNames);
+            clickBaseByElement(element);
+            clickBase(btnRemoveContact);
+            pause(1500);
         }
+
+
+
+//        List<WebElement> allContactsNames = findElementsBase(getAllContactsNames);
+//        // find our contact
+//        if(!allContactsNames.isEmpty()) {
+//            /*
+//            list {1,2,3,4,5,6,7}
+//            1-r
+//            {2,3,4,5,6,7}
+//             */
+//            for (WebElement el : allContactsNames) {
+//                    // click on our contact
+//                    // click //button[text()='Remove']
+//                    pause(1500);
+//                    clickBaseByElement(el);
+//                    clickBase(btnRemoveContact);
+//            }
+//        } else {
+//            System.out.println("list is empty");
+//        }
     }
 
     public boolean isContactListEmpty() {

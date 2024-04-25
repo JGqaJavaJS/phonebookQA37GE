@@ -40,7 +40,7 @@ public class DeleteContactTests extends BaseTest{
     }
 
     @Test
-    public void deleteAllContacts() {
+    public void deleteAllExistingContacts() {
         app.getContactHelper().deleteAllContacts();
         app.getContactHelper().pause(3000);
         Assert.assertTrue(app.getContactHelper().isContactListEmpty());

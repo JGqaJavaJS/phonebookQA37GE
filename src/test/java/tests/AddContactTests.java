@@ -24,7 +24,7 @@ public class AddContactTests extends BaseTest{
     public void positiveAddContact() {
         app.getContactHelper().clickAddOnNavBar();
         ContactDTO contactDTO = new ContactDTO()
-                .setName("kjdhgjkr")
+                .setName("dsafadfsdcDASD")
                 .setLastName("jhsbfh")
                 .setPhone("5554567890")
                 .setEmail("sjkfhj@mail.com")
