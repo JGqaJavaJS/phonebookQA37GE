@@ -3,6 +3,7 @@ package helpers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Alert;
 
 import java.util.List;
 
@@ -53,6 +54,19 @@ public class BaseHelper {
 
     //-------------------------
 
+    // alerts -----------
+
+    public String getTextAlert() {
+        Alert alert = driver.switchTo().alert();
+        return alert.getText().trim();
+    }
+
+    public void clickOkAlert() {
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
+
+    // ------------
     public void pause(int time) {
         try {
             Thread.sleep(time);
