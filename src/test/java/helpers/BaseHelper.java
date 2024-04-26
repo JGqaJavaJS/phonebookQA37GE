@@ -2,6 +2,9 @@ package helpers;
 
 import com.google.common.io.Files;
 import org.openqa.selenium.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tests.BaseTest;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +13,8 @@ import java.util.List;
 public class BaseHelper {
     WebDriver driver;
 
+    static Logger logger = LoggerFactory.getLogger(BaseHelper.class);
+
     public BaseHelper(WebDriver driver) {
         this.driver = driver;
     }
@@ -17,11 +22,12 @@ public class BaseHelper {
     // find elemnt / elements
 
     protected WebElement findElementBase(By by) {
-        System.out.println("Locator: findElement: " + by.toString());
+        logger.info("Locator: findElement: " + by.toString());
         return driver.findElement(by);
     }
 
     protected List<WebElement> findElementsBase(By by) {
+        logger.info("Locator: findElements: " + by.toString());
         return driver.findElements(by);
     }
 
@@ -38,7 +44,9 @@ public class BaseHelper {
     // text
 
     protected String getTextBaseByLocator(By by) {
-        return findElementBase(by).getText().trim();
+        String text = findElementBase(by).getText().trim();
+        logger.info("get text from element: " + text);
+        return text;
     }
 
     protected String getTextBaseByElement(WebElement el) {
@@ -76,6 +84,7 @@ public class BaseHelper {
     }
 
     public String takeScreenshot() {
+        logger.info("start screenshot");
         File tmp = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         File screenshot = new File("screenshots/screen" + System.currentTimeMillis()
         +".png");
