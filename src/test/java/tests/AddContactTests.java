@@ -28,7 +28,8 @@ public class AddContactTests extends BaseTest{
     public void positiveAddContact() {
         Random random = new Random();
         String name = "John" + String.valueOf(random.nextInt(1000));
-        String phone = String.valueOf(random.nextInt(10000)) +"56789";
+        String phone = String.valueOf(random.nextInt(10000)) +"456789";
+        System.out.println(phone);
         //String phone2 = String.valueOf(random.nextLong(1000000000L));
 
         app.getContactHelper().clickAddOnNavBar();
