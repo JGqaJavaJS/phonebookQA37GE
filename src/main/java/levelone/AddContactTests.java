@@ -12,7 +12,6 @@ public class AddContactTests extends BaseTest {
 
     @BeforeClass
     public void preconditions() {
-        // TODO login
         // click on login btn by: //a[@href='/login']
         driver.findElement(By.xpath("//a[@href='/login']")).click();
         // fill email by: //input[@name='email']
