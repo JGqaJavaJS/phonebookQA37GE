@@ -18,7 +18,7 @@ public class BaseTestAPI {
     public String token = "";
     public static final String AUTH = "Authorization";
     public static final String ENDPOINT_LOGIN = "/user/login/usernamepassword";
-
+    public static final String ENDPOINT_CONTACTS = "/contacts";
 
     @BeforeSuite
     public void initAPI() {
